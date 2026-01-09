@@ -1,5 +1,35 @@
 # Reflective Coaching Agent: Solution Overview
 
+## Improvements Over Previous Solution
+
+| Issue in Previous Solution | How Current Solution Fixes It |
+|---------------------------|-------------------------------|
+| **Phase budget exceeded max_turns** | Budget allocation now guarantees total never exceeds `max_turns`. Added explicit handling for short sessions (< 4 turns) with proportional distribution. |
+| **Commitment/key_insight never extracted** | Now extracts commitment and key_insight during CHALLENGE phase using a cost-optimized approach (only 1 extra LLM call when needed). |
+| **Initial topic lost after first turn** | Topic is now saved as the first user message, preserving context in conversation history for all subsequent turns. |
+| **Heuristic-only phase transitions** | Hybrid approach: heuristic check first (fast), then LLM confirmation for quality transitions. Falls back gracefully on LLM failure. |
+| **No error handling for LLM failures** | Added retry logic with validation for reflection generation. Conservative fallbacks prevent crashes. |
+
+### Key Code Changes
+
+```
+app/core/transitions.py    → Fixed calculate_phase_budgets() to cap total budget
+app/core/llm.py            → Added extract_observations() with commitment extraction
+app/core/agent.py          → Updated update_observations_node() for CHALLENGE phase
+app/services/coaching.py   → Save topic as initial user message in start_session()
+```
+
+### Impact
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Budget overflow for 4-turn sessions | 6 turns allocated (150%) | 4 turns allocated (100%) |
+| Commitment detection | Never during session | Extracted in CHALLENGE phase |
+| Topic context in turn 2+ | Lost | Preserved in message history |
+| Transition quality | Heuristic only | Heuristic + LLM confirmation |
+
+---
+
 ## Strengths of the Solution
 
 ### 1. Structured Coaching Framework
