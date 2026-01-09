@@ -153,15 +153,36 @@ reflective-coach/
 │       ├── coaching.py      # Main orchestration
 │       └── reflection.py    # Reflection generation
 ├── tests/
-├── environment.yml          # Conda environment
-├── requirements.txt         # Pip requirements
-└── .env.example
+├── scripts/
+│   ├── run_case_feedback.py  # Python integration test
+│   └── run_case_feedback.sh  # Bash integration test
+├── environment.yml           # Conda environment
+├── requirements.txt          # Pip requirements
+├── .env.example
+└── .gitignore
 ```
 
 ## Running Tests
 
+### Unit Tests
+
 ```bash
 pytest tests/ -v
+```
+
+### Integration Test
+
+Run a full coaching session simulation:
+
+```bash
+# Start the server first
+uvicorn app.main:app --reload
+
+# In another terminal, run the integration test
+python scripts/run_case_feedback.py
+
+# Or using bash (Git Bash on Windows)
+bash scripts/run_case_feedback.sh
 ```
 
 ## Design Decisions
