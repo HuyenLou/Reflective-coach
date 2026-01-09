@@ -1,0 +1,37 @@
+name: reflective-coach
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python version
+  - python==3.12
+
+  # Core Framework (available on conda-forge)
+  - fastapi>=0.104.0
+  - uvicorn>=0.24.0
+
+  # Database
+  - sqlalchemy>=2.0.0
+  - aiosqlite>=0.19.0
+
+  # Utilities
+  - pydantic>=2.5.0
+  - pydantic-settings>=2.1.0
+  - python-dotenv>=1.0.0
+
+  # Testing
+  - pytest>=7.4.0
+  - pytest-asyncio>=0.21.0
+  - httpx>=0.25.0
+
+  # Optional - Streamlit UI
+  - streamlit>=1.28.0
+
+  # Pip dependencies (not available on conda)
+  - pip
+  - pip:
+      # LangGraph & LLM (pip only)
+      - langgraph>=0.2.0
+      - langchain-anthropic>=0.1.0
+      - langchain-core>=0.2.0
