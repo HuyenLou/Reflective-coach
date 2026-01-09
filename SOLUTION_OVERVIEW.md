@@ -101,73 +101,12 @@ Post-session reflections include:
 - Track outcome classifications over time
 - Identify common resistance patterns
 
-### Medium-Term Features
+#### 4. Improved Error Handling
+- Add retry logic for transient LLM failures
+- Better validation of user inputs
+- Graceful handling of edge cases (empty messages, special characters)
 
-#### 4. Multi-Session Continuity
-- Link sessions for the same learner
-- Reference past commitments and progress
-- Build longitudinal learner profiles
-
-#### 5. Adaptive Coaching Style
-- Detect learner communication preferences
-- Adjust tone (more/less direct) based on signals
-- Personalize example phrases to learner context
-
-#### 6. Real-Time Phase Suggestions
-- WebSocket support for streaming responses
-- Show coach "thinking" during generation
-- Allow manual phase override
-
-### Long-Term Vision
-
-#### 7. Voice Interface
-- Speech-to-text input for natural conversation
-- Text-to-speech output with appropriate tone
-- Emotion detection from voice signals
-
-#### 8. Multi-Modal Context
-- Accept documents (performance reviews, goals)
-- Analyze meeting transcripts for coaching topics
-- Integrate calendar for commitment scheduling
-
-#### 9. Coach Training Mode
-- Human coaches review AI sessions
-- Annotate good/bad responses
-- Fine-tune model on high-quality examples
-
-#### 10. Enterprise Integration
-- SSO authentication
-- Role-based access (coach, learner, manager)
-- Integration with HRIS systems
-- Compliance and audit logging
-
----
-
-## Technical Debt to Address
-
-| Area | Issue | Priority |
-|------|-------|----------|
-| Database | Migrate to PostgreSQL for production | Medium |
-| Testing | Add more integration tests with mocked LLM | High |
-| Observability | Add structured logging and metrics | Medium |
-| Security | Rate limiting and input sanitization | High |
-| Documentation | API versioning strategy | Low |
-
----
-
-## Metrics for Success
-
-### Coaching Quality
-- % of sessions reaching `breakthrough_achieved`
-- Average turns to first commitment
-- Commitment follow-through rate (requires follow-up mechanism)
-
-### Technical Performance
-- Response latency (p50, p95)
-- LLM token usage per session
-- Error rate by endpoint
-
-### User Satisfaction
-- Session completion rate
-- Repeat usage rate
-- NPS score (if feedback collected)
+#### 5. Testing Coverage
+- Add integration tests with mocked LLM responses
+- Test edge cases for phase transitions
+- Validate reflection generation quality
